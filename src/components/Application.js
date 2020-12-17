@@ -1,57 +1,43 @@
-import React, { useState } from "react";
-
+import React, { useState, useEffect } from "react";
+import axios from "axios"
 import "components/Application.scss";
 import DayList from './DayList'
 import Appointment from 'components/appointment'
-
-const appointments = [
-  {
-    id: 1,
-    time: "12pm",
-  },
-  {
-    id: 2,
-    time: "1pm",
-    interview: {
-      student: "Lydia Miller-Jones",
-      interviewer: {
-        id: 1,
-        name: "Sylvia Palmer",
-        avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
-  },
-  {
-    id: 3,
-    time: "4pm",
-    interview: {
-      student: "Lydia Miller-Jones",
-      interviewer: {
-        id: 1,
-        name: "Sylvia Palmer",
-        avatar: "https://i.imgur.com/LpaY82x.png",
-      }
-    }
-  }
-
-];
+import {getAppointmentsForDay, getInterview, getInterviewersForDay} from 'helpers/selectors';
+import useApplicationData from 'hooks/useApplicationData'
 
 
 export default function Application(props) {
+  
+  const {
+    state,
+    setDay,
+    bookInterview,
+    cancelInterview,
+    setSpots
+  } = useApplicationData();
+  
+  const dailyAppointments = getAppointmentsForDay(state, state.day);
+  // console.log(dailyAppointments)
 
-  const [day, setDay] = useState("monday");
+  // function appointmentsLoop() {
+    let appointmentsLoop = getAppointmentsForDay(state, state.day).map((appointment) => {
+      const interview = getInterview(state, appointment.interview);
+      // console.log("this is the log", interview)
+      let interviewers = getInterviewersForDay(state, state.day)
+      return (
+        <Appointment
+          key={appointment.id}
+          id={appointment.id}
+          time={appointment.time}
+          bookInterview={bookInterview}
+          interviewers= {interviewers}
+          interview={interview}
+          delete={cancelInterview}
+          />
+        );
+    })
 
-  function appointmentsLoop() {
-    return appointments.map((appointment) => {
-       return(
-       <Appointment
-       id ={appointment.id}
-       time={appointment.time}
-       interview={appointment.interview}
-       />
-       )
-     })
-   }
 
   return (
 
@@ -65,8 +51,9 @@ export default function Application(props) {
         <hr className="sidebar__separator sidebar--centered" />
         <nav className="sidebar__menu" >
           <DayList
-            days={days}
-            day={day}
+            days={state.days}
+            day={state.day}
+            spots={setSpots}
             setDay={setDay}
           />
         </nav>
@@ -77,7 +64,7 @@ export default function Application(props) {
         />
       </section>
       <section className="schedule">
-        {appointmentsLoop()}
+        {appointmentsLoop}
       </section>
 
     </main>
@@ -85,20 +72,4 @@ export default function Application(props) {
   );
 }
 
-const days = [
-  {
-    id: 1,
-    name: "Monday",
-    spots: 2,
-  },
-  {
-    id: 2,
-    name: "Tuesday",
-    spots: 5,
-  },
-  {
-    id: 3,
-    name: "Wednesday",
-    spots: 0,
-  },
-];
+
