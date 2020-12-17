@@ -12,5 +12,5 @@ return(
     <Button onClick={props.onConfirm}>Confirm</Button>
   </section>
 </main>
-)
+  )
 }
