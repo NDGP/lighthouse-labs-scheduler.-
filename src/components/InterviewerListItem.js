@@ -6,7 +6,7 @@ export default function DayListItem(props) {
 
 const interviewerClass = classnames("interviewers__item", {
   "interviewers__item-image": props.avatar,
-  "interviewers__item--selected":props.selected,
+  "interviewers__item--selected && interviewers__item-image":props.selected,
 })
 
 function nameReturn(){
