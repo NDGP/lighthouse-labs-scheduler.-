@@ -77,8 +77,8 @@ export default function Appointment(props) {
           />
         )
       }
-      {mode === SAVE && <Status message= {`saving`}/>}
-      {mode === DELETE && <Status message= {`deleting`}/>}
+      {mode === SAVE && <Status message= {`Saving`}/>}
+      {mode === DELETE && <Status message= {`Deleting`}/>}
       {mode === CONFIRM && (
       <Confirm 
         onCancel={() => transition(SHOW)}

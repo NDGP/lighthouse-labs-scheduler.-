@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios"
 
 
@@ -46,7 +46,7 @@ function bookInterview(id, interview) {
 
   console.log("this is ID", id);
   console.log("this is interview", interview)
-  return axios.put(`http://localhost:8001/api/appointments/${id}`, {interview})
+  return axios.put(`/api/appointments/${id}`, {interview})
   .then(() => {
     setState({
       ...state,
@@ -72,7 +72,7 @@ function cancelInterview(id) {
     }
     return day
   })
-  return axios.delete(`http://localhost:8001/api/appointments/${id}`)
+  return axios.delete(`/api/appointments/${id}`)
   .then(() => {
     setState({
       ...state,
