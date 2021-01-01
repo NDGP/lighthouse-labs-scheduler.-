@@ -1,5 +1,6 @@
 import React from "react"
 
+// when a form is completed the show components replaces the form with the users chosen information. 
 
 export default function Show(props){
 

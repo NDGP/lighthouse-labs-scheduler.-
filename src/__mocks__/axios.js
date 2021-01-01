@@ -1,3 +1,5 @@
+//mock database for testing  
+
 const fixtures = {
   days: [
     {
@@ -82,7 +84,7 @@ export default {
   }),
   put: jest.fn(url => {
     console.log(url, 'this is url')
-    if (url === `http://localhost:8001/api/appointments/1`) {
+    if (url === `/api/appointments/1`) {
       return Promise.resolve({ 
         status: 204, 
         statusText: "No Content" 
@@ -90,7 +92,7 @@ export default {
     }
   }),
   delete: jest.fn(url => {
-    if (url === `http://localhost:8001/api/appointments/1`) {
+    if (url === `/api/appointments/1`) {
       return Promise.resolve({ 
         status: 204, 
         statusText: "No Content" 

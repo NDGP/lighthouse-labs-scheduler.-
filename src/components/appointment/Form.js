@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import InterviewerList from "components/InterviewerList"
 import Button from "components/Button"
 
+// after selecting an empty slot,
+// the form allows users to input there name and choose an available interviewer
 
 export default function Form(props) {
 
   const [name, setName] = useState(props.name || "");
-  const [interviewer, setInterviewer] = useState(props.interviewer || null);
-  const [error, setError] = useState("");
+  const [interviewer, setInterviewer] = useState(props.interviewer || null)
+  const [error, setError] = useState("")
   const reset = () => {
      setInterviewer(null)
      setName("")
@@ -17,13 +19,15 @@ export default function Form(props) {
     props.onCancel()
   }
 
+  // validate checks if users are imputing correctly and returns an error message if not
+
   function validate() {
     if (name === "") {
-      setError("Student name cannot be blank");
+      setError("Student name cannot be blank")
       return;
     }
     if (interviewer === null) {
-      setError("Must select an interviewer");
+      setError("Must select an interviewer")
       return
     }
   

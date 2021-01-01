@@ -1,4 +1,4 @@
-import React, { useRef, useState, useEffect } from "react";
+import React from "react";
 import "components/appointment/styles.scss"
 import Status from "./Status"
 import Show from "./Show"
@@ -8,9 +8,11 @@ import Confirm from "./Confirm"
 import Error from "./Error"
 import useVisualMode from "hooks/useVisualMode"
 
+// compiling the appointment components and transitions between them.
 
 export default function Appointment(props) {
 
+  // modes
   const EMPTY = "EMPTY";
   const SHOW = "SHOW";
   const CREATE = "CREATE"
@@ -22,7 +24,7 @@ export default function Appointment(props) {
   const DELETE_ERROR = "DELETEERROR"
 
   
-
+  // saving appointments, transitioning to the show of that appointment in the schedule
   function save(name, interviewer) {
     const interview = {
       student: name,
@@ -35,6 +37,8 @@ export default function Appointment(props) {
 
   }
   
+  // cancel appointments, transitioning appointment in the schedule with interview deleted
+
   function cancelInterview(){
     transition(DELETE)
     props.delete(props.id)
@@ -47,6 +51,8 @@ export default function Appointment(props) {
     props.interview ? SHOW : EMPTY
     );
     
+
+  
   return (
     <div data-testid="appointment" > 
       {mode === EMPTY && <Empty onAdd={() => transition(CREATE)} />}

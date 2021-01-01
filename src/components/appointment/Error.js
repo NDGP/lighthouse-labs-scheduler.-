@@ -2,6 +2,7 @@ import React from "react";
 
 export default function Error(props) {
 
+// component to show errors when schedule cannot save or it cant delete a interview.
 
 return(
 <main className="appointment__card appointment__card--error">

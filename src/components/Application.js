@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios"
+import React from "react";
 import "components/Application.scss";
 import DayList from './DayList'
 import Appointment from 'components/appointment'
@@ -17,13 +16,10 @@ export default function Application(props) {
     setSpots
   } = useApplicationData();
   
-  const dailyAppointments = getAppointmentsForDay(state, state.day);
-  // console.log(dailyAppointments)
+  // appointmentsLoop maps and returns an appointment objects from the api to be printed.
 
-  // function appointmentsLoop() {
     let appointmentsLoop = getAppointmentsForDay(state, state.day).map((appointment) => {
       const interview = getInterview(state, appointment.interview);
-      // console.log("this is the log", interview)
       let interviewers = getInterviewersForDay(state, state.day)
       return (
         <Appointment
@@ -38,6 +34,7 @@ export default function Application(props) {
         );
     })
 
+  // the final application return, printing the side bar, logo, and appointments. 
 
   return (
 

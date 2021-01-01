@@ -2,6 +2,7 @@ import React from "react";
 
 export default function Empty(props) {
 
+// component for empty scheduled slots 
 
 return(
 

@@ -3,6 +3,8 @@ import Button from "components/Button"
 
 export default function Confirm(props) {
 
+// confirmation component html, space for user to back out or continue with creating their new appointment
+
 
 return(
 <main className="appointment__card appointment__card--confirm">
